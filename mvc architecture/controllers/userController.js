@@ -1,10 +1,34 @@
+const user = require("../models/userModel");
+
 const getAllUsers = (req, res) => {
-  res.send("This is /user route get request");
+  user
+    .find({})
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send("This is /user route get request");
+    });
 };
 const postUsers = (req, res) => {
-  res.json({
-    name: "kunal",
+  const newUser = new user({
+    firstname: "Kunal",
+    lastname: "Idhate",
+    email: "kunal@gmail.com",
   });
+
+  newUser
+    .save()
+    .then(() => {
+      res.json({
+        message: "Document has been created",
+      });
+    })
+    .catch((err) => {
+      res.json({
+        message: err,
+      });
+    });
 };
 
 module.exports = { getAllUsers, postUsers };
