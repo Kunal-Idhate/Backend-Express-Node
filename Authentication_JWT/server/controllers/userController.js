@@ -4,7 +4,7 @@ const getAllUsers = (req, res) => {
   user
     .find({})
     .then((result) => {
-      res.status(205).json(result);
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.send("This is /user route get request");
